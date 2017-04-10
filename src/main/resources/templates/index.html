@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GROCERY WARS</title>
+</head>
+<body ng-app="grocery">
+
+ng-controller="item"
+
+Needed Item<input type="text" ng-change="udateItem" ng-model="Items">
+
+<table>
+    <tr ng-repeat="">
+        <td>{{}}</td>
+        <td></td>
+        <td><img width="100" ng-src="{{item.thumbnail.path}}.{{item.thumbnail.extension}}"></td>
+
+
+
+    </tr>
+
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script type="text/javascript">
+var app= angular.module("grocery", []);
+
+ app.controller("character", ["$scope", "$http", function($scope, $http){
+
+$scope.items= ""
+
+ $http.get("http://api.walmartlabs.com/v1/search?query=all&format=json&apiKey=c3exxssx4eme5j56s5zk7xg7")
+.then(function(response) {
+    $scope.heros =  response.data.data.results;
+});
+
+
+
+</script>
+</body>
+</html>
