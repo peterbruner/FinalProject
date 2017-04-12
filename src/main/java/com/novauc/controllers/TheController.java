@@ -29,20 +29,18 @@ import javax.xml.ws.Response;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 @Controller
 public class TheController {
 
-//    @Autowired
-//    SearchByProductNameRepository sbpnRepository;
-
     public static ArrayList<SearchByProductName> results = new ArrayList<>();
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String home(Model model, HttpSession session) {
+    public String home(Model model) {
 
         if(results.size() > 0) {
-            model.addAttribute("modeledResult", results.get(0));
+            model.addAttribute("modeledResult", results);
         }
         return "index";
     }
@@ -54,7 +52,6 @@ public class TheController {
                 "http://www.SupermarketAPI.com/api.asmx/SearchByProductName?APIKEY=59837307ef&ItemName=" + userRequest,
                 String.class);
 
-        //ArrayList<SearchByProductName> results = new ArrayList<>();
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -105,11 +102,7 @@ public class TheController {
         System.out.println(results.get(results.size()-1).getItemID());
         System.out.println(results.get(results.size()-1).getAisleNumber());
 
-
-
-
-
-        return "index";
+        return "redirect:/";
     }
 
     public static String getCharacterDataFromElement(Element e) {

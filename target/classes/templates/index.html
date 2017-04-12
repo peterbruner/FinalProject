@@ -11,22 +11,22 @@
     <button type="submit">Submit</button>
 </form>
 
-{{^modeledResult}}
-Stuff
-{{/modeledResult}}
+<!--{{^modeledResult}}-->
+<!--Stuff-->
+<!--{{/modeledResult}}-->
 
-<ol>
+{{#modeledResult}}
+<ul>
     <li>
-        {{#modeledResult}}
         {{Itemname}}
         {{itemDescription}}
         {{itemCategory}}
         {{itemID}}
-        {{itemImage}}
+        <img src="{{itemImage}}" alt="something">
         {{aisleNumber}}
-        {{/modeledResult}}
     </li>
-</ol>
+</ul>
+{{/modeledResult}}
 
 
 </body>
