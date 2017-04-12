@@ -2,8 +2,12 @@ package com.novauc.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-//@JsonIgnoreProperties(ignoreUnknown = true)
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+//@JsonIgnoreProperties(ignoreUnknown = true)
+//@XmlRootElement(name="ArrayOfProduct")
+@XmlRootElement
 public class SearchByProductName {
 
     private String itemName;
@@ -12,6 +16,8 @@ public class SearchByProductName {
     private String itemID;
     private String itemImage;
     private String aisleNumber;
+
+    public SearchByProductName() {}
 
     public SearchByProductName(String itemName, String itemDescription, String itemCategory, String itemID, String itemImage, String aisleNumber) {
         this.itemName = itemName;
@@ -26,6 +32,7 @@ public class SearchByProductName {
         return itemName;
     }
 
+    @XmlElement(name="Itemname")
     public void setItemName(String itemname) {
         this.itemName = itemName;
     }
@@ -34,6 +41,7 @@ public class SearchByProductName {
         return itemDescription;
     }
 
+    @XmlElement(name="ItemDescription")
     public void setItemDescription(String itemDescription) {
         this.itemDescription = itemDescription;
     }
@@ -42,6 +50,7 @@ public class SearchByProductName {
         return itemCategory;
     }
 
+    @XmlElement(name="ItemCategory")
     public void setItemCategory(String itemCategory) {
         this.itemCategory = itemCategory;
     }
@@ -50,6 +59,7 @@ public class SearchByProductName {
         return itemID;
     }
 
+    @XmlElement(name="ItemID")
     public void setItemID(String itemID) {
         this.itemID = itemID;
     }
@@ -58,6 +68,7 @@ public class SearchByProductName {
         return itemImage;
     }
 
+    @XmlElement(name="ItemImage")
     public void setItemImage(String itemImage) {
         this.itemImage = itemImage;
     }
@@ -66,6 +77,7 @@ public class SearchByProductName {
         return aisleNumber;
     }
 
+    @XmlElement(name="AisleNumber")
     public void setAisleNumber(String aisleNumber) {
         this.aisleNumber = aisleNumber;
     }
