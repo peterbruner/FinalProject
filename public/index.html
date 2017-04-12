@@ -1,28 +1,28 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-    <!--<meta charset="UTF-8">-->
-    <!--<title>Store Locator</title>-->
-<!--</head>-->
-<!--&lt;!&ndash;Angular App starts here &ndash;&gt;-->
-<!--<body ng-app="finalProjectApp">-->
-    <!--<div ng-controller="finalProjectController">-->
-        <!--store location:<input ng-change="checkStores() type="text ng-model="zip">-->
-        <!--{{zip}}-->
-        <!--<table>-->
-            <!--<tr>-->
-                <!--<td> zipcode </td>-->
-            <!--</tr>-->
-            <!--<tr ng-repeat="zip in zips">-->
-                <!--<td>{{zip.name}}</td>-->
-            <!--</tr>-->
-        <!--</table>-->
-    <!--</div>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Store Locator</title>
+</head>
+<!--Angular App starts here -->
+<body ng-app="finalProjectApp">
+    <div ng-controller="finalProjectController">
+        store location:<input ng-change="checkStores() type="text ng-model="zip">
+        {{zip}}
+        <table>
+            <tr>
+                <td> zipcode </td>
+            </tr>
+            <tr ng-repeat="zip in zips">
+                <td>{{zip.name}}</td>
+            </tr>
+        </table>
+    </div>
 
 
-<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
-<!--<script src="/final.js">-->
-<!--</script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="/final.js">
+</script>
 
-<!--</body>-->
+</body>
 <!--</html>-->
