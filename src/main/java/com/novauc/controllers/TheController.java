@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
+
+import javax.servlet.http.HttpSession;
 import javax.xml.parsers.*;
 import org.xml.sax.InputSource;
 import org.w3c.dom.*;
@@ -34,11 +36,16 @@ public class TheController {
 //    @Autowired
 //    SearchByProductNameRepository sbpnRepository;
 
+    public static ArrayList<SearchByProductName> results = new ArrayList<>();
+
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String home(Model model) {
+    public String home(Model model, HttpSession session) {
+
+        if(results.size() > 0) {
+            model.addAttribute("modeledResult", results.get(0));
+        }
         return "index";
     }
-
 
     @RequestMapping(path = "/find", method = RequestMethod.POST)
     public String getSearchByProductName(String userRequest) throws IOException, JAXBException {
@@ -47,7 +54,7 @@ public class TheController {
                 "http://www.SupermarketAPI.com/api.asmx/SearchByProductName?APIKEY=59837307ef&ItemName=" + userRequest,
                 String.class);
 
-        ArrayList<SearchByProductName> results = new ArrayList<>();
+        //ArrayList<SearchByProductName> results = new ArrayList<>();
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -90,6 +97,18 @@ public class TheController {
             e.printStackTrace();
         }
         int x = 0;
+        System.out.println(results.size());
+        System.out.println(results.get(results.size()-1).getItemImage());
+        System.out.println(results.get(results.size()-1).getItemname());
+        System.out.println(results.get(results.size()-1).getItemDescription());
+        System.out.println(results.get(results.size()-1).getItemCategory());
+        System.out.println(results.get(results.size()-1).getItemID());
+        System.out.println(results.get(results.size()-1).getAisleNumber());
+
+
+
+
+
         return "index";
     }
 

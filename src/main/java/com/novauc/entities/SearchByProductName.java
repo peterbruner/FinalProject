@@ -2,25 +2,21 @@ package com.novauc.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-//@JsonIgnoreProperties(ignoreUnknown = true)
-//@XmlRootElement(name="ArrayOfProduct")
-@XmlRootElement
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchByProductName {
 
-    private String itemName;
+    private String Itemname;
     private String itemDescription;
     private String itemCategory;
     private String itemID;
     private String itemImage;
     private String aisleNumber;
 
-    public SearchByProductName() {}
+    public SearchByProductName() {
+    }
 
-    public SearchByProductName(String itemName, String itemDescription, String itemCategory, String itemID, String itemImage, String aisleNumber) {
-        this.itemName = itemName;
+    public SearchByProductName(String itemname, String itemDescription, String itemCategory, String itemID, String itemImage, String aisleNumber) {
+        Itemname = itemname;
         this.itemDescription = itemDescription;
         this.itemCategory = itemCategory;
         this.itemID = itemID;
@@ -28,20 +24,18 @@ public class SearchByProductName {
         this.aisleNumber = aisleNumber;
     }
 
-    public String getItemName() {
-        return itemName;
+    public String getItemname() {
+        return Itemname;
     }
 
-    @XmlElement(name="Itemname")
-    public void setItemName(String itemname) {
-        this.itemName = itemName;
+    public void setItemname(String itemname) {
+        Itemname = itemname;
     }
 
     public String getItemDescription() {
         return itemDescription;
     }
 
-    @XmlElement(name="ItemDescription")
     public void setItemDescription(String itemDescription) {
         this.itemDescription = itemDescription;
     }
@@ -50,7 +44,6 @@ public class SearchByProductName {
         return itemCategory;
     }
 
-    @XmlElement(name="ItemCategory")
     public void setItemCategory(String itemCategory) {
         this.itemCategory = itemCategory;
     }
@@ -59,7 +52,6 @@ public class SearchByProductName {
         return itemID;
     }
 
-    @XmlElement(name="ItemID")
     public void setItemID(String itemID) {
         this.itemID = itemID;
     }
@@ -68,7 +60,6 @@ public class SearchByProductName {
         return itemImage;
     }
 
-    @XmlElement(name="ItemImage")
     public void setItemImage(String itemImage) {
         this.itemImage = itemImage;
     }
@@ -77,7 +68,6 @@ public class SearchByProductName {
         return aisleNumber;
     }
 
-    @XmlElement(name="AisleNumber")
     public void setAisleNumber(String aisleNumber) {
         this.aisleNumber = aisleNumber;
     }

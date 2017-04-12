@@ -11,5 +11,23 @@
     <button type="submit">Submit</button>
 </form>
 
+{{^modeledResult}}
+Stuff
+{{/modeledResult}}
+
+<ol>
+    <li>
+        {{#modeledResult}}
+        {{Itemname}}
+        {{itemDescription}}
+        {{itemCategory}}
+        {{itemID}}
+        {{itemImage}}
+        {{aisleNumber}}
+        {{/modeledResult}}
+    </li>
+</ol>
+
+
 </body>
 </html>
