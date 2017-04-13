@@ -9,9 +9,15 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.jaunt.JauntException;
 import com.jaunt.UserAgent;
 import org.apache.commons.io.IOUtils;
+import org.hibernate.engine.spi.QueryParameters;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -104,18 +110,44 @@ public class finalProjectController implements FinalProjectInterface {
     }
 
     @RequestMapping(path = "/jaunt")
-    public String jauntson(){
+
+    public String jauntson(ModelAttribute model){
+
         try{
             UserAgent userAgent = new UserAgent();         //create new userAgent (headless browser).
             userAgent.sendGET("http://api.walmartlabs.com/v1/stores?format=json&zip=20744&apiKey=c3exxssx4eme5j56s5zk7xg7");   //send request
             System.out.println(userAgent.json);            //print the retrieved JSON object
             System.out.println("Other response data: " + userAgent.response); //response metadata, including headers.
+            model = 
+
         }
         catch(JauntException e){         //if an HTTP/connection error occurs, handle JauntException.
             System.err.println(e);
         }
 
     return "";
+    }
+
+    public class Servlet extends HttpServlet {
+
+        @Override
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+            handleRequest(request, response);
+        }
+
+        protected void doGet(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+            handleRequest(request, response);
+        }
+
+        protected void handleRequest(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+
+            String p = request.getParameter("url");
+            System.out.println("test");
+            System.out.println(p);
+        }
     }
 
 }
