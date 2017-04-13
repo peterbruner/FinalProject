@@ -1,10 +1,14 @@
 package com.novauc;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.jaunt.JauntException;
+import com.jaunt.UserAgent;
+import org.apache.commons.io.IOUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +19,7 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +28,7 @@ import java.util.List;
 @RestController
 public class finalProjectController implements FinalProjectInterface {
     public String eStore() throws IOException, JAXBException {
+        ArrayList<JsonParser> jsonp = new ArrayList<JsonParser>();
 
         Store store = new Store();
         String uri =
@@ -32,14 +38,14 @@ public class finalProjectController implements FinalProjectInterface {
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/json");
 
-       // JsonParser jsonParser = jsonParser()
-
         InputStream json = connection.getInputStream();
+        byte[] bytes = IOUtils.toByteArray(json);
+
 
         connection.disconnect();
 
 
-        return "";
+        return bytes.toString();
     }
     @RequestMapping(path = "/walmart")
     public String walmartTest() {
@@ -52,13 +58,13 @@ public class finalProjectController implements FinalProjectInterface {
         return "";
     }
 
-    @RequestMapping(path = "/iphone")
+    @RequestMapping(path = "/craigslist")
     public String test() throws IOException {
             return scrape();
     }
 
     public String scrape() throws IOException {
-        String searchQuery = "bike";
+        String searchQuery = "car";
 
         WebClient client = new WebClient();
         client.getOptions().setCssEnabled(false);
@@ -93,8 +99,25 @@ public class finalProjectController implements FinalProjectInterface {
                     }
                 }
 
+
         return "";
     }
+
+    @RequestMapping(path = "/jaunt")
+    public String jauntson(){
+        try{
+            UserAgent userAgent = new UserAgent();         //create new userAgent (headless browser).
+            userAgent.sendGET("http://api.walmartlabs.com/v1/stores?format=json&zip=20744&apiKey=c3exxssx4eme5j56s5zk7xg7");   //send request
+            System.out.println(userAgent.json);            //print the retrieved JSON object
+            System.out.println("Other response data: " + userAgent.response); //response metadata, including headers.
+        }
+        catch(JauntException e){         //if an HTTP/connection error occurs, handle JauntException.
+            System.err.println(e);
+        }
+
+    return "";
+    }
+
 }
 
 
