@@ -10,6 +10,14 @@ public class Item {
     private BigDecimal price ;
     private String url ;
 
+    public Item(String title, BigDecimal price, String url) {
+        this.title = title;
+        this.price = price;
+        this.url = url;
+    }
+    public Item(){
+
+    }
 
     public String getTitle() {
         return title;
