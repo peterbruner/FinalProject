@@ -38,7 +38,6 @@ public class TheController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String home(Model model) {
-
         if(results.size() > 0) {
             model.addAttribute("modeledResult", results);
         }
@@ -94,13 +93,6 @@ public class TheController {
             e.printStackTrace();
         }
         int x = 0;
-        System.out.println(results.size());
-        System.out.println(results.get(results.size()-1).getItemImage());
-        System.out.println(results.get(results.size()-1).getItemname());
-        System.out.println(results.get(results.size()-1).getItemDescription());
-        System.out.println(results.get(results.size()-1).getItemCategory());
-        System.out.println(results.get(results.size()-1).getItemID());
-        System.out.println(results.get(results.size()-1).getAisleNumber());
 
         return "redirect:/";
     }
