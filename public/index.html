@@ -9,8 +9,19 @@
     <input type="text" placeholder ="search" name="input">
     <button type="submit"> Push it! </button>
 </form>
+    <ul>
+        {{#craigslistItems}}
+            <li>Title</li>
+            {{title}}
+            <li>Price</li>
+            {{price}}
+            <li>URL</li>
+            {{url}}
+        {{/craigslistItems}}
+    </ul>
 
-<!--Angular App starts here -->
+
+<!--Angular App starts here-->
 <!--<body ng-app="finalProjectApp">-->
     <!--<div ng-controller="finalProjectController">-->
         <!--store location:<input ng-change="checkStores() type="text ng-model="zip">-->
@@ -26,8 +37,8 @@
     <!--</div>-->
 
 
-<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
-<!--<script src="/final.js">-->
-<!--</script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="/final.js">
+</script>
 </body>
 </html>

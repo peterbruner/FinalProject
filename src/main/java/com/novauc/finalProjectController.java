@@ -8,9 +8,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpSession;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,7 +54,11 @@ public class finalProjectController implements FinalProjectInterface {
     }
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String home(){
+    public String home(Model model, HttpSession session){
+
+        model.addAttribute("craigslistItems", session.getAttribute("craigslistItems"));
+
+
         return "index.html";
     }
 
@@ -72,8 +79,9 @@ public class finalProjectController implements FinalProjectInterface {
 //            return scrape();
 //    }
     @RequestMapping (path = "/search", method = RequestMethod.POST)
-    public String scrape(String input) throws IOException {
+    public String scrape(String input, Model model, HttpSession session, String title, BigDecimal price, String Url) throws IOException {
         String searchQuery = input;
+
 
         WebClient client = new WebClient();
         client.getOptions().setCssEnabled(false);
@@ -85,11 +93,12 @@ public class finalProjectController implements FinalProjectInterface {
         //page = page.asXml();
 
         List<HtmlElement> items = (List<HtmlElement>) page.getByXPath("//p[@class='result-info']");
+        ArrayList<Item> craigslistItems = new ArrayList<>();
+
         if (items.isEmpty()) {
             System.out.println("No items found !");
         } else {
             for (HtmlElement htmlItem : items) {
-
                 HtmlAnchor itemAnchor = htmlItem.getFirstByXPath(".//a");
 
                 HtmlElement spanPrice = htmlItem.getFirstByXPath(".//span[@class='result-price']");
@@ -101,14 +110,16 @@ public class finalProjectController implements FinalProjectInterface {
                 item.setUrl( "https://newyork.craigslist.org" +
                         itemAnchor.getHrefAttribute());
                 item.setPrice(new BigDecimal(itemPrice.replace("$", "")));
-
+                craigslistItems.add(item);
                 ObjectMapper mapper = new ObjectMapper();
                 String jsonString = mapper.writeValueAsString(item) ;
                 System.out.println(jsonString);
-                    }
+                RestTemplate restTemplate = new RestTemplate();
+            }
+
                 }
-
-
+            session.setAttribute("craigslistItems", craigslistItems);
+            model.addAttribute("craigslistItems", craigslistItems);
         return "redirect:/";
     }
 
