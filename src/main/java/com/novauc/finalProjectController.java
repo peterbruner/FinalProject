@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
 import javax.xml.bind.JAXBException;
@@ -59,7 +58,7 @@ public class finalProjectController implements FinalProjectInterface {
         model.addAttribute("craigslistItems", session.getAttribute("craigslistItems"));
 
 
-        return "index.html";
+        return "index";
     }
 
     @RequestMapping(path = "/walmart")
@@ -114,12 +113,10 @@ public class finalProjectController implements FinalProjectInterface {
                 ObjectMapper mapper = new ObjectMapper();
                 String jsonString = mapper.writeValueAsString(item) ;
                 System.out.println(jsonString);
-                RestTemplate restTemplate = new RestTemplate();
             }
 
                 }
             session.setAttribute("craigslistItems", craigslistItems);
-            model.addAttribute("craigslistItems", craigslistItems);
         return "redirect:/";
     }
 
