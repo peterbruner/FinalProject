@@ -1,35 +1,25 @@
 package com.novauc.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-//import com.novauc.entities.ArrayOfProduct;
-//import com.novauc.entities.MyPojo;
-//import com.novauc.entities.Product;
-
 
 import com.novauc.entities.SearchByProductName;
+import com.novauc.entities.Items;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpSession;
 import javax.xml.parsers.*;
 import org.xml.sax.InputSource;
 import org.w3c.dom.*;
-import java.io.*;
 
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 
-import javax.xml.ws.Response;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 @Controller
 public class TheController {
@@ -104,5 +94,20 @@ public class TheController {
             return cd.getData();
         }
         return "?";
+    }
+
+
+    @RequestMapping(path = "/find1", method = RequestMethod.POST)
+    public String getWalmart(String userRequest1) throws IOException {
+        RestTemplate restTemplate = new RestTemplate();
+        String walmart = restTemplate.getForObject(
+                "http://api.walmartlabs.com/v1/search?apiKey=c3exxssx4eme5j56s5zk7xg7&query=" + userRequest1, String.class
+        );
+        ObjectMapper objectMapper = new ObjectMapper();
+        Items items1 = objectMapper.readValue(walmart, Items.class);
+//        System.out.println(items1.getName());
+//        System.out.println(items1.getAvailableOnline());
+        int x = 0;
+        return "redirect:/";
     }
 }
