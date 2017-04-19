@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Items {
-    ArrayList<Item> items;
+    private ArrayList<Item> items;
 
     public Items() {
     }
@@ -18,4 +18,5 @@ public class Items {
     public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
+
 }

@@ -11,16 +11,17 @@
     <button type="submit">Submit</button>
 </form>
 
-<form action="/find1" method="post">
-    <input type="text" placeholder="Item requested" name="userRequest1">
-    <button type="submit">Submit</button>
-</form>
+{{#modeledWalmart}}
+<ul>
+    <li>
+        {{name}}
 
-<!--{{^modeledResult}}-->
-<!--Stuff-->
-<!--{{/modeledResult}}-->
+        {{stock}}
+    </li>
+</ul>
+{{/modeledWalmart}}
 
-{{#modeledResult}}
+{{#modeledSupermarket}}
 <ul>
     <li>
         {{Itemname}}
@@ -28,10 +29,9 @@
         {{itemCategory}}
         {{itemID}}
         <img src="{{itemImage}}" alt="something">
-        {{aisleNumber}}
     </li>
 </ul>
-{{/modeledResult}}
+{{/modeledSupermarket}}
 
 
 <!--<ul>-->
@@ -46,14 +46,14 @@
                 <!--<th>aisleNumber</th>-->
             <!--</tr>-->
             <!--<tr>-->
-                <!--{{#modeledResult}}-->
+                <!--{{#modeledSupermarket}}-->
                 <!--<td>{{Itemname}}</td>-->
                 <!--<td>{{itemDescription}}</td>-->
                 <!--<td>{{itemCategory}}</td>-->
                 <!--<td>{{itemID}}</td>-->
                 <!--<td><img src="{{itemImage}}" alt="something"></td>-->
                 <!--<td>{{aisleNumber}}</td>-->
-                <!--{{/modeledResult}}-->
+                <!--{{/modeledSupermarket}}-->
             <!--</tr>-->
         <!--</table>-->
     <!--</li>-->
