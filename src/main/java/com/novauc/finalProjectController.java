@@ -1,56 +1,30 @@
 package com.novauc;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
-import javax.xml.bind.JAXBException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigDecimal;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by dangelojoyce on 4/10/17.
  */
 @Controller
-public class finalProjectController implements FinalProjectInterface {
+public class finalProjectController  {
+    HashMap<String, String> zipcodeMap = new HashMap<>();
 
-    public static ArrayList<Item> jsitem = new ArrayList<>();
-
-    public String eStore() throws IOException, JAXBException {
-        ArrayList<JsonParser> jsonp = new ArrayList<JsonParser>();
-
-        Store store = new Store();
-        String uri =
-                "http://api.walmartlabs.com/v1/stores?format=json&zip=20744&apiKey=c3exxssx4eme5j56s5zk7xg7";
-        URL url = new URL(uri);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
-        connection.setRequestProperty("Accept", "application/json");
-
-        InputStream json = connection.getInputStream();
-        byte[] bytes = IOUtils.toByteArray(json);
-
-
-        connection.disconnect();
-
-
-        return bytes.toString();
-    }
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String home(Model model, HttpSession session){
@@ -61,16 +35,16 @@ public class finalProjectController implements FinalProjectInterface {
         return "index";
     }
 
-    @RequestMapping(path = "/walmart")
-    public String walmartTest() {
-        try {
-            return eStore();
-        } catch (Exception e){
-            System.out.println("Houston had a problem @: ");
-            e.printStackTrace();
-        }
-        return "";
-    }
+//    @RequestMapping(path = "/walmart")
+//    public String walmartTest() {
+//        try {
+//            return eStore();
+//        } catch (Exception e){
+//            System.out.println("Houston had a problem @: ");
+//            e.printStackTrace();
+//        }
+//        return "";
+//    }
 
 
 //    @RequestMapping(path = "/search")
@@ -78,18 +52,24 @@ public class finalProjectController implements FinalProjectInterface {
 //            return scrape();
 //    }
     @RequestMapping (path = "/search", method = RequestMethod.POST)
-    public String scrape(String input, Model model, HttpSession session, String title, BigDecimal price, String Url) throws IOException {
-        String searchQuery = input;
+    public String scrape(String zipcode, Model model, HttpSession session, String title, BigDecimal price, String Url) throws IOException {
+        String searchQuery = zipcode;
+        zipcodeMap.put("DC", "https://dc.craigslist.org/search/sss?sort=rel&query=" + URLEncoder.encode(searchQuery, "UTF-8"));
+        zipcodeMap.put("Dallas", "https://dallas.craigslist.org/search/sss?sort=rel&query=" + URLEncoder.encode(searchQuery, "UTF-8"));
 
 
         WebClient client = new WebClient();
         client.getOptions().setCssEnabled(false);
         client.getOptions().setJavaScriptEnabled(false);
-        String searchUrl = "https://newyork.craigslist.org/search/sss?sort=rel&query=" + URLEncoder.encode(searchQuery, "UTF-8");
+        String searchUrl = zipcodeMap.get(searchQuery);
+//        String searchUrl = "https://dc.craigslist.org/search/sss?sort=rel&query=" + URLEncoder.encode(searchQuery, "UTF-8");
         HtmlPage page = client.getPage(searchUrl);
+//        zipcode.put(searchQuery, searchUrl);
+//        if(searchQuery == "75001"){
+//            zipcode.get(searchQuery);
+//            return searchQuery;
+//        }
 
-  //      System.out.println(page.asXml());
-        //page = page.asXml();
 
         List<HtmlElement> items = (List<HtmlElement>) page.getByXPath("//p[@class='result-info']");
         ArrayList<Item> craigslistItems = new ArrayList<>();
@@ -106,7 +86,7 @@ public class finalProjectController implements FinalProjectInterface {
 
                 Item item = new Item();
                 item.setTitle(itemAnchor.asText());
-                item.setUrl( "https://newyork.craigslist.org" +
+                item.setUrl( searchUrl +
                         itemAnchor.getHrefAttribute());
                 item.setPrice(new BigDecimal(itemPrice.replace("$", "")));
                 craigslistItems.add(item);
@@ -119,6 +99,12 @@ public class finalProjectController implements FinalProjectInterface {
             session.setAttribute("craigslistItems", craigslistItems);
         return "redirect:/";
     }
+//    public String HashMap(){
+//        HashMap<String, String> zipcode = new HashMap<>();
+//        zipcode.put("75001", "https://dallas.craigslist.org/search/sss?sort=rel&query=");
+//
+//
+//    }
 
 //    @RequestMapping(path = "/")
 //    public String jauntson(){
