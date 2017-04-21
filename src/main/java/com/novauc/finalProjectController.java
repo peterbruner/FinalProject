@@ -56,15 +56,12 @@ public class finalProjectController  {
     public String scrape(String zipcode, String input,  HttpSession session) throws IOException {
         String searchQuery = input;
         String location = zipcode;
-        zipcodeMap.put("DC", "https://dc.craigslist.org/search/sss?sort=rel&query=" + URLEncoder.encode(searchQuery, "UTF-8"));
-        zipcodeMap.put("Dallas", "https://dallas.craigslist.org/search/sss?sort=rel&query=" + URLEncoder.encode(searchQuery, "UTF-8"));
-        zipcodeHash.put(zipcode, zipcodeMap);
-
-
+        zipcodeMap.put("DC", "https://dc.craigslist.org/search/sss?sort=rel&query=");
+        zipcodeMap.put("Dallas", "https://dallas.craigslist.org/search/sss?sort=rel&query=");
         WebClient client = new WebClient();
         client.getOptions().setCssEnabled(false);
         client.getOptions().setJavaScriptEnabled(false);
-        String searchUrl = zipcodeHash.get(zipcodeMap.get(zipcode));
+        String searchUrl = zipcodeMap.get(location) + URLEncoder.encode(searchQuery, "UTF-8");
 //        String searchUrl = "https://dc.craigslist.org/search/sss?sort=rel&query=" + URLEncoder.encode(searchQuery, "UTF-8");
         HtmlPage page = client.getPage(searchUrl);
 //        zipcode.put(searchQuery, searchUrl);
