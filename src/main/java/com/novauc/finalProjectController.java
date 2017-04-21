@@ -24,6 +24,7 @@ import java.util.List;
 @Controller
 public class finalProjectController  {
     HashMap<String, String> zipcodeMap = new HashMap<>();
+    HashMap<String, HashMap>zipcodeHash = new HashMap<>();
 
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
@@ -52,16 +53,18 @@ public class finalProjectController  {
 //            return scrape();
 //    }
     @RequestMapping (path = "/search", method = RequestMethod.POST)
-    public String scrape(String zipcode, Model model, HttpSession session, String title, BigDecimal price, String Url) throws IOException {
-        String searchQuery = zipcode;
+    public String scrape(String zipcode, String input,  HttpSession session) throws IOException {
+        String searchQuery = input;
+        String location = zipcode;
         zipcodeMap.put("DC", "https://dc.craigslist.org/search/sss?sort=rel&query=" + URLEncoder.encode(searchQuery, "UTF-8"));
         zipcodeMap.put("Dallas", "https://dallas.craigslist.org/search/sss?sort=rel&query=" + URLEncoder.encode(searchQuery, "UTF-8"));
+        zipcodeHash.put(zipcode, zipcodeMap);
 
 
         WebClient client = new WebClient();
         client.getOptions().setCssEnabled(false);
         client.getOptions().setJavaScriptEnabled(false);
-        String searchUrl = zipcodeMap.get(searchQuery);
+        String searchUrl = zipcodeHash.get(zipcodeMap.get(zipcode));
 //        String searchUrl = "https://dc.craigslist.org/search/sss?sort=rel&query=" + URLEncoder.encode(searchQuery, "UTF-8");
         HtmlPage page = client.getPage(searchUrl);
 //        zipcode.put(searchQuery, searchUrl);
