@@ -25,12 +25,13 @@ public class NileController {
     public String home(Model model, HttpSession session, String userRequest) {
         model.addAttribute("modeledSupermarketItems", session.getAttribute("supermarketItems"));
         model.addAttribute("modeledWalmartItems", session.getAttribute("walmartItems"));
+        model.addAttribute("modeledWalmartStores", session.getAttribute("walmartStores"));
         return "index";
     }
 
     @RequestMapping(path = "/find", method = RequestMethod.POST)
     public String getSearchByProductName(String userRequest, String zipRequest, HttpSession session) throws IOException, JAXBException {
-        session.setAttribute("supermarketItems", SearchMethods.getSupermarket(userRequest));
+        session.setAttribute("supermarketItems", SearchMethods.supermarketItems(userRequest));
         Items items = SearchMethods.walmartItems(userRequest);
         session.setAttribute("walmartItems", items.getItems());
         session.setAttribute("walmartStores", SearchMethods.wmStores(zipRequest));
