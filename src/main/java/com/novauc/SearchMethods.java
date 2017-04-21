@@ -1,7 +1,12 @@
-package com.novauc.entities;
+package com.novauc;
 
 
+import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.novauc.entities.Items;
+import com.novauc.entities.SearchByProductName;
+import com.novauc.entities.Source;
+import com.novauc.entities.WalmartStore;
 import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
@@ -66,7 +71,7 @@ public class SearchMethods {
         catch (Exception e) {
             e.printStackTrace();
         }
-        int x = 0;
+//        int x = 0;
         return results;
     }
 
@@ -79,54 +84,26 @@ public class SearchMethods {
         return "?";
     }
 
-//    //Walmart
-//    public static ArrayList<Items> setWalmart(String userRequest) throws IOException {
-//
-//        ArrayList<Items> results = new ArrayList<>();
-//
-//        RestTemplate restTemplate = new RestTemplate();
-//        String walmart = restTemplate.getForObject(
-//                "http://api.walmartlabs.com/v1/search?apiKey=c3exxssx4eme5j56s5zk7xg7&query=" + userRequest, String.class
-//        );
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        Items items = objectMapper.readValue(walmart, Items.class);
-//
-//
-//        System.out.println(items.getItems().size());
-//        System.out.println(items.getItems().get(items.getItems().size()-2).getName());
-//        System.out.println(items.getItems().get(items.getItems().size()-2).getStock());
-//        System.out.println();
-////        int x = 0;
-//        return results;
-//    }
-
-    public static Items setWalmart(String userRequest) throws IOException {
-
-        ArrayList<Items> results = new ArrayList<>();
+    //Walmart
+    public static Items walmartItems(String userRequest) throws IOException{
 
         RestTemplate restTemplate = new RestTemplate();
-        String walmart = restTemplate.getForObject(
+        String jsonData = restTemplate.getForObject(
                 "http://api.walmartlabs.com/v1/search?apiKey=c3exxssx4eme5j56s5zk7xg7&query=" + userRequest, String.class
         );
         ObjectMapper objectMapper = new ObjectMapper();
-        Items items = objectMapper.readValue(walmart, Items.class);
+        Items items = objectMapper.readValue(jsonData, Items.class);
 
-
-        System.out.println(items.getItems().size());
-        System.out.println(items.getItems().get(items.getItems().size()-2).getName());
-        System.out.println(items.getItems().get(items.getItems().size()-2).getMsrp());
-
-        System.out.println(items.getItems().get(items.getItems().size()-2).getStock());
-        System.out.println();
-//        int x = 0;
         return items;
     }
 
-    public static ArrayList<Item> getWalmart(String userRequest) throws IOException {
-        setWalmart(userRequest);
-        ArrayList<Item> results = new ArrayList<>();
-//        results.add(new Item(String itemId, String parentItemId, String name, String msrp, String salePrice, String upc, String categoryPath, String longDescription, String thumbnailImage, String shortDescription, String mediumImage, String largeImage, String productTrackingUrl, String standardShipRate, String marketplace, String productUrl, String categoryNode, String bundle, String stock, String addToCartUrl, String affiliateAddToCartUrl, String offerType, String isTwoDayShippingEligible, String availableOnline));
-
-    return results;
+    public static WalmartStore[] wmStores(String zipRequest) throws IOException{
+        RestTemplate restTemplate = new RestTemplate();
+        WalmartStore[] jsonData = restTemplate.getForObject(
+                "http://api.walmartlabs.com/v1/stores?apiKey=c3exxssx4eme5j56s5zk7xg7&zip=" + zipRequest + "&format=json", WalmartStore[].class
+        );
+        System.out.println(jsonData.length);
+        System.out.println(jsonData.toString());
+        return jsonData;
     }
 }

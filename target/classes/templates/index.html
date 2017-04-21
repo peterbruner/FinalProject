@@ -6,12 +6,16 @@
 </head>
 <body>
 
+<a href="/logout">Log out</a>
+
 <form action="/find" method="post">
     <input type="text" placeholder="Item requested" name="userRequest">
+    <input type="text" placeholder="Zipcode" name="zipRequest">
     <button type="submit">Submit</button>
 </form>
 
-{{#modeledWalmart}}
+
+{{#modeledWalmartItems}}
 <ul>
     <li>
         {{name}}
@@ -19,9 +23,9 @@
         {{stock}}
     </li>
 </ul>
-{{/modeledWalmart}}
+{{/modeledWalmartItems}}
 
-{{#modeledSupermarket}}
+{{#modeledSupermarketItems}}
 <ul>
     <li>
         {{Itemname}}
@@ -31,7 +35,7 @@
         <img src="{{itemImage}}" alt="something">
     </li>
 </ul>
-{{/modeledSupermarket}}
+{{/modeledSupermarketItems}}
 
 
 <!--<ul>-->
