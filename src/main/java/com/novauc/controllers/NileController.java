@@ -26,6 +26,7 @@ public class NileController {
         model.addAttribute("modeledSupermarketItems", session.getAttribute("supermarketItems"));
         model.addAttribute("modeledWalmartItems", session.getAttribute("walmartItems"));
         model.addAttribute("modeledWalmartStores", session.getAttribute("walmartStores"));
+        model.addAttribute("modeledSupermarketStores", session.getAttribute("supermarketStores"));
         return "index";
     }
 
@@ -35,6 +36,7 @@ public class NileController {
         Items items = SearchMethods.walmartItems(userRequest);
         session.setAttribute("walmartItems", items.getItems());
         session.setAttribute("walmartStores", SearchMethods.wmStores(zipRequest));
+        session.setAttribute("supermarketStores", SearchMethods.supermarketStores(zipRequest));
         return "redirect:/";
     }
 

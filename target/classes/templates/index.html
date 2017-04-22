@@ -14,10 +14,18 @@
     <button type="submit">Submit</button>
 </form>
 
+{{#modeledSupermarketStores}}
+<ul>
+    <li>
+        {{smName}} {{smAddress}} {{smCity}}
+    </li>
+</ul>
+{{/modeledSupermarketStores}}
+
 {{#modeledWalmartStores}}
 <ul>
     <li>
-        {{city}}
+        {{city}} {{name}}
     </li>
 </ul>
 {{/modeledWalmartStores}}

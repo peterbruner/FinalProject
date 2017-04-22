@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @JsonIgnoreProperties
-public class WalmartStore {
+public class WalmartStores {
 
     private String no;
     private String name;
@@ -18,10 +18,10 @@ public class WalmartStore {
     private String sundayOpen;
     private String timezone;
 
-    public WalmartStore() {
+    public WalmartStores() {
     }
 
-    public WalmartStore(String no, String name, String country, String streetAddress, String city, String stateProvCode, String zip, String phoneNumber, String sundayOpen, String timezone) {
+    public WalmartStores(String no, String name, String country, String streetAddress, String city, String stateProvCode, String zip, String phoneNumber, String sundayOpen, String timezone) {
         this.no = no;
         this.name = name;
         this.country = country;

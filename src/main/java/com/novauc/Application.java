@@ -1,6 +1,5 @@
 package com.novauc;
 
-import com.novauc.entities.SearchByProductName;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

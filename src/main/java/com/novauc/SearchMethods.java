@@ -1,11 +1,11 @@
 package com.novauc;
 
 
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.novauc.entities.Items;
 import com.novauc.entities.SearchByProductName;
-import com.novauc.entities.WalmartStore;
+import com.novauc.entities.StoresByZip;
+import com.novauc.entities.WalmartStores;
 import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
@@ -14,7 +14,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.IOException;
 import java.io.StringReader;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SearchMethods {
@@ -83,13 +82,13 @@ public class SearchMethods {
     }
 
 
-    public static ArrayList<SearchByProductName> supermarketStores(String userRequest){
+    public static ArrayList<StoresByZip> supermarketStores(String zipRequest){
 
-        ArrayList<SearchByProductName> results = new ArrayList<>();
+        ArrayList<StoresByZip> results = new ArrayList<>();
 
         RestTemplate restTemplate = new RestTemplate();
         String XMLdata = restTemplate.getForObject(
-                "http://www.SupermarketAPI.com/api.asmx/StoresByZip?APIKEY=59837307&ZipCode=" + userRequest,
+                "http://www.SupermarketAPI.com/api.asmx/StoresByZip?APIKEY=59837307&ZipCode=" + zipRequest,
                 String.class);
 
         try {
@@ -105,38 +104,41 @@ public class SearchMethods {
 
                 NodeList name = element.getElementsByTagName("Storename");
                 Element line = (Element) name.item(0);
-                String itemName = getCharacterDataFromElement(line);
+                String smName = getCharacterDataFromElement(line);
 
                 NodeList address = element.getElementsByTagName("Address");
                 line = (Element) address.item(0);
-                String itemAddress = getCharacterDataFromElement(line);
+                String smAddress = getCharacterDataFromElement(line);
 
                 NodeList city = element.getElementsByTagName("City");
                 line = (Element) city.item(0);
-                String itemCity = getCharacterDataFromElement(line);
+                String smCity = getCharacterDataFromElement(line);
 
                 NodeList state = element.getElementsByTagName("State");
                 line = (Element) state.item(0);
-                String itemState = getCharacterDataFromElement(line);
+                String smState = getCharacterDataFromElement(line);
 
                 NodeList zip = element.getElementsByTagName("Zip");
                 line = (Element) zip.item(0);
-                String itemZip = getCharacterDataFromElement(line);
+                String smZip = getCharacterDataFromElement(line);
 
                 NodeList phone = element.getElementsByTagName("Phone");
                 line = (Element) phone.item(0);
-                String itemPhone = getCharacterDataFromElement(line);
+                String smPhone = getCharacterDataFromElement(line);
 
                 NodeList id = element.getElementsByTagName("StoreId");
                 line = (Element) id.item(0);
-                String itemId = getCharacterDataFromElement(line);
+                String smId = getCharacterDataFromElement(line);
 
-                results.add(new SearchByProductName(itemName, itemDesc, itemCat, itemID, itemImage, aisleNumber));
+                results.add(new StoresByZip(smName, smAddress, smCity, smState, smZip, smPhone, smId));
+                results.size();
+                results.get(results.size()-1).getSmName();
             }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
+        int x = 0;
         return results;
     }
 
@@ -153,10 +155,10 @@ public class SearchMethods {
     }
 
     //Walmart Stores
-    public static WalmartStore[] wmStores(String zipRequest) throws IOException{
+    public static WalmartStores[] wmStores(String zipRequest) throws IOException{
         RestTemplate restTemplate = new RestTemplate();
-        WalmartStore[] jsonData = restTemplate.getForObject(
-                "http://api.walmartlabs.com/v1/stores?apiKey=c3exxssx4eme5j56s5zk7xg7&zip=" + zipRequest + "&format=json", WalmartStore[].class
+        WalmartStores[] jsonData = restTemplate.getForObject(
+                "http://api.walmartlabs.com/v1/stores?apiKey=c3exxssx4eme5j56s5zk7xg7&zip=" + zipRequest + "&format=json", WalmartStores[].class
         );
         return jsonData;
     }
