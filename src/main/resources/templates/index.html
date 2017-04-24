@@ -6,13 +6,22 @@
 </head>
 <body>
 
-<a href="/logout">Log out</a>
-
-<form action="/find" method="post">
-    <input type="text" placeholder="Item requested" name="userRequest">
-    <input type="text" placeholder="Zipcode" name="zipRequest">
+<form action="/search" method="post">
+    <input type="text" placeholder="Item requested" name="input">
+    <input type="text" placeholder="Zipcode" name="zipcode">
+    <input type="text" placeholder="City" name="city">
     <button type="submit">Submit</button>
 </form>
+
+{{#craigslistItems}}
+<ul>
+    <li>
+        {{title}}
+        price: {{price}}
+        <a href="{{url}}">Craigslist</a>
+    </li>
+</ul>
+{{/craigslistItems}}
 
 {{#modeledSupermarketStores}}
 <ul>
@@ -30,8 +39,6 @@
 </ul>
 {{/modeledWalmartStores}}
 
-
-
 {{#modeledWalmartItems}}
 <ul>
     <li>
@@ -46,39 +53,13 @@
 <ul>
     <li>
         {{Itemname}}
-        {{itemDescription}}
         {{itemCategory}}
         {{itemID}}
-        <img src="{{itemImage}}" alt="something">
+        <img src="{{itemImage}}">
     </li>
 </ul>
 {{/modeledSupermarketItems}}
 
-
-<!--<ul>-->
-    <!--<li>-->
-        <!--<table>-->
-            <!--<tr>-->
-                <!--<th>Itemname</th>-->
-                <!--<th>itemDescription</th>-->
-                <!--<th>itemCategory</th>-->
-                <!--<th>itemID</th>-->
-                <!--<th>itemImage</th>-->
-                <!--<th>aisleNumber</th>-->
-            <!--</tr>-->
-            <!--<tr>-->
-                <!--{{#modeledSupermarket}}-->
-                <!--<td>{{Itemname}}</td>-->
-                <!--<td>{{itemDescription}}</td>-->
-                <!--<td>{{itemCategory}}</td>-->
-                <!--<td>{{itemID}}</td>-->
-                <!--<td><img src="{{itemImage}}" alt="something"></td>-->
-                <!--<td>{{aisleNumber}}</td>-->
-                <!--{{/modeledSupermarket}}-->
-            <!--</tr>-->
-        <!--</table>-->
-    <!--</li>-->
-<!--</ul>-->
 
 </body>
 </html>

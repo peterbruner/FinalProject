@@ -2,10 +2,11 @@ package com.novauc;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.novauc.entities.Items;
-import com.novauc.entities.SearchByProductName;
-import com.novauc.entities.StoresByZip;
-import com.novauc.entities.WalmartStores;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.novauc.entities.*;
 import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
@@ -14,18 +15,24 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.IOException;
 import java.io.StringReader;
+import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URLEncoder;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class SearchMethods {
 
-    //SupermarketAPI
-    public static ArrayList<SearchByProductName> supermarketItems(String userRequest){
+    //Supermarket Items
+    public static ArrayList<SearchByProductName> supermarketItems(String input){
 
         ArrayList<SearchByProductName> results = new ArrayList<>();
 
         RestTemplate restTemplate = new RestTemplate();
         String xmlData = restTemplate.getForObject(
-                "http://www.SupermarketAPI.com/api.asmx/SearchByProductName?APIKEY=59837307ef&ItemName=" + userRequest,
+                "http://www.SupermarketAPI.com/api.asmx/SearchByProductName?APIKEY=59837307ef&ItemName=" + input,
                 String.class);
 
         try {
@@ -72,6 +79,7 @@ public class SearchMethods {
         return results;
     }
 
+    //Used by SupermarketItems & Supermarket Stores
     public static String getCharacterDataFromElement(Element e) {
         Node child = e.getFirstChild();
         if (child instanceof CharacterData) {
@@ -82,13 +90,14 @@ public class SearchMethods {
     }
 
 
-    public static ArrayList<StoresByZip> supermarketStores(String zipRequest){
+    //Supermarket Stores
+    public static ArrayList<StoresByZip> supermarketStores(String zipcode){
 
         ArrayList<StoresByZip> results = new ArrayList<>();
 
         RestTemplate restTemplate = new RestTemplate();
         String XMLdata = restTemplate.getForObject(
-                "http://www.SupermarketAPI.com/api.asmx/StoresByZip?APIKEY=59837307&ZipCode=" + zipRequest,
+                "http://www.SupermarketAPI.com/api.asmx/StoresByZip?APIKEY=59837307&ZipCode=" + zipcode,
                 String.class);
 
         try {
@@ -138,16 +147,15 @@ public class SearchMethods {
         catch (Exception e) {
             e.printStackTrace();
         }
-        int x = 0;
         return results;
     }
 
 
     //Walmart Items
-    public static Items walmartItems(String userRequest) throws IOException{
+    public static Items walmartItems(String input) throws IOException{
         RestTemplate restTemplate = new RestTemplate();
         String jsonData = restTemplate.getForObject(
-                "http://api.walmartlabs.com/v1/search?apiKey=c3exxssx4eme5j56s5zk7xg7&query=" + userRequest, String.class
+                "http://api.walmartlabs.com/v1/search?apiKey=c3exxssx4eme5j56s5zk7xg7&query=" + input, String.class
         );
         ObjectMapper objectMapper = new ObjectMapper();
         Items items = objectMapper.readValue(jsonData, Items.class);
@@ -155,11 +163,42 @@ public class SearchMethods {
     }
 
     //Walmart Stores
-    public static WalmartStores[] wmStores(String zipRequest) throws IOException{
+    public static WalmartStores[] wmStores(String zipcode) throws IOException{
         RestTemplate restTemplate = new RestTemplate();
         WalmartStores[] jsonData = restTemplate.getForObject(
-                "http://api.walmartlabs.com/v1/stores?apiKey=c3exxssx4eme5j56s5zk7xg7&zip=" + zipRequest + "&format=json", WalmartStores[].class
+                "http://api.walmartlabs.com/v1/stores?apiKey=c3exxssx4eme5j56s5zk7xg7&zip=" + zipcode + "&format=json", WalmartStores[].class
         );
         return jsonData;
+    }
+
+    //Craigslist
+    public static ArrayList<ItemCL> craigslistItems(String city, String input) throws IOException {
+
+        HashMap<String, String> zipcodeMap = new HashMap<>();
+
+        String searchQuery = input;
+        String location = city.replaceAll("\\s","");
+        zipcodeMap.put(location, "https://" +location.trim()+ ".craigslist.org/search/sss?sort=rel&query=");
+        WebClient client = new WebClient();
+        client.getOptions().setCssEnabled(false);
+        client.getOptions().setJavaScriptEnabled(false);
+        String searchUrl = zipcodeMap.get(location) + URLEncoder.encode(searchQuery, "UTF-8");
+        HtmlPage page = client.getPage(searchUrl);
+
+        List<HtmlElement> items = (List<HtmlElement>) page.getByXPath("//p[@class='result-info']");
+        ArrayList<ItemCL> craigslistItems = new ArrayList<>();
+
+        for (HtmlElement htmlItem : items) {
+            HtmlAnchor itemAnchor = htmlItem.getFirstByXPath(".//a");
+            HtmlElement spanPrice = htmlItem.getFirstByXPath(".//span[@class='result-price']");
+            String itemPrice = spanPrice == null ? "0.0" : spanPrice.asText();
+
+            ItemCL item = new ItemCL();
+            item.setTitle(itemAnchor.asText());
+            item.setUrl("https://" + location + ".craigslist.org" + itemAnchor.getHrefAttribute());
+            item.setPrice(new BigDecimal(itemPrice.replace("$", "")));
+            craigslistItems.add(item);
+        }
+        return craigslistItems;
     }
 }
