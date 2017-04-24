@@ -7,8 +7,9 @@
 </head>
 <body style="margin: 10px;">
 <form action="/search" method="post">
-    <input type="text" placeholder ="search" name="input">
-    <input type="text" placeholder ="location" name="zipcode">
+    <input type="text" placeholder="Item requested" name="input">
+    <input type="text" placeholder="Zipcode" name="zipcode">
+    <input type="text" placeholder="City" name="city">
     <button type="submit" class="btn btn-danger"> Find it! </button>
 </form>
     <!--<ul>-->
@@ -32,5 +33,76 @@
         </div>
         {{/craigslistItems}}
 
+{{#modeledSupermarketStores}}
+<div>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>{{smName}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>address :{{smAddress}} {{smCity}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{{/modeledSupermarketStores}}
+
+{{#modeledWalmartStores}}
+<div>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>{{name}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>address :{{city}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{{/modeledWalmartStores}}
+
+{{#modeledWalmartItems}}
+<div>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>{{name}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{stock}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{{/modeledWalmartItems}}
+
+{{#modeledSupermarketItems}}
+
+<div>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>{{Itemname}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>address :{{itemCategory}} {{itemID}}</td>
+        </tr>
+        <tr>
+            <td><img src="{{itemImage}}">Super Market</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{{/modeledSupermarketItems}}
 </body>
 </html>

@@ -5,17 +5,17 @@ import java.math.BigDecimal;
 /**
  * Created by dangelojoyce on 4/12/17.
  */
-public class Item {
+public class ItemCL {
     private String title ;
     private BigDecimal price ;
     private String url ;
 
-    public Item(String title, BigDecimal price, String url) {
+    public ItemCL(String title, BigDecimal price, String url) {
         this.title = title;
         this.price = price;
         this.url = url;
     }
-    public Item(){
+    public ItemCL(){
 
     }
 
