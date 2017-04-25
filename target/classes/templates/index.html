@@ -25,11 +25,11 @@
         </tr>
         </thead>
 
-        {{#craigslistItems}}
+{{#craigslistItems}}
         <tbody>
         <tr>
             <td>{{title}}</td>
-            <td>{{price}}</td>
+            <td>${{price}}</td>
             <td>Craigslist</td>
             <td><a href="{{url}}">View original listing</a></td>
         </tr>
@@ -42,7 +42,7 @@
         <tbody>
         <tr>
             <td>{{name}}</td>
-            <td>{{salePrice}}</td>
+            <td>${{salePrice}}</td>
             <td>
                 {{#modeledWalmartStores}}
                 {{name}}
@@ -57,7 +57,7 @@
         <tbody>
         <tr>
             <td>{{Itemname}}</td>
-            <td>{{itemCategory}}</td>
+            <td>${{itemCost}}</td>
             <td>
                 {{#modeledSupermarketStores}}
                 {{smName}}

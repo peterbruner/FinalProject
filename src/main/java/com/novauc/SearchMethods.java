@@ -22,6 +22,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class SearchMethods {
 
@@ -70,7 +71,11 @@ public class SearchMethods {
                 line = (Element) aisle.item(0);
                 String aisleNumber = getCharacterDataFromElement(line);
 
-                results.add(new SearchByProductName(itemName, itemDesc, itemCat, itemID, itemImage, aisleNumber));
+                Random rand = new Random();
+
+                int smCost = rand.nextInt(50) + 1;
+
+                results.add(new SearchByProductName(itemName, itemDesc, itemCat, itemID, itemImage, aisleNumber, smCost));
             }
         }
         catch (Exception e) {
