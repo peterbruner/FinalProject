@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:padding-right="http://java.sun.com/xml/ns/persistence/orm"
+      xmlns:padding-left="http://www.w3.org/1999/xhtml" xmlns: xmlns: xmlns:
+      xmlns:background-image="http://www.w3.org/1999/xhtml" xmlns:background-repeat="http://www.w3.org/1999/xhtml"
+      xmlns:background-position="http://www.w3.org/1999/xhtml" xmlns:background-size="http://www.w3.org/1999/xhtml"
+      xmlns:width="http://www.w3.org/1999/xhtml" xmlns:height="http://www.w3.org/1999/xhtml" xmlns: xmlns:>
 <head>
     <meta charset="UTF-8">
     <title>Store Locator</title>
@@ -8,34 +12,53 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="http://code.jquery.com/jquery.js"></script>
     <!--<script src="js/bootstrap.min.js"></script>-->
+
+    <!--<style-->
+<!--body {-->
+    <!--background: #00ff00 url("smiley.gif") no-repeat fixed center;-->
+    <!--&lt;!&ndash;background-image: url("BG.jpg");&ndash;&gt;-->
+   <!--&lt;!&ndash;background-repeat: no-repeat;&ndash;&gt;-->
+   <!--&lt;!&ndash;background-position: center;&ndash;&gt;-->
+   <!--&lt;!&ndash;background-size: cover;&ndash;&gt;-->
+   <!--&lt;!&ndash;width: 100%;&ndash;&gt;-->
+   <!--&lt;!&ndash;height: 100%;&ndash;&gt;-->
+   <!--}>-->
+   <!--</style>-->
+    <!--(body control) body {(background-image:url(BG.jpg); background-repeat: no repeat;/background-color:blue; all this below goes inside the style}-->
+    <!-- you can use the below to determine the style/// <img src="BG.jpg" height="150"/>-->
+
+    <title>NILE</title>
 </head>
-<body style="margin: 10px;">
+<body style="background: url(BG.jpg) no-repeat center center fixed; background-size: cover;">
+    <center>
 <form action="/search" method="post">
     <input type="text" placeholder="Item requested" name="input">
     <input type="text" placeholder="Zipcode" name="zipcode">
     <input type="text" placeholder="City" name="city">
     <button type="submit" class="btn btn-danger"> Find it! </button>
 </form>
-<!--<ul>-->
+    </center>
+    <!--<img src="BG.jpg">-->
+
+    <!--<ul>-->
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="col-md-6">
                 {{#craigslistItems}}
                 <div>
-                <table class="table table-striped table-hover">
+                <table class="table table-hover" @media (max-width: 797px) {
+                       body {
+                       padding-left: 0px;
+                       padding-right: 0px;
+                       }
+                       }>
                     <thead>
                     <tr>
                         <th>{{title}}</th>
+                        <th>price: {{price}}</th>
+                        <th><a href="{{url}}">Craigslist</a></th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>price: {{price}}</td>
-                    </tr>
-                    <tr>
-                        <td><a href="{{url}}">Craigslist</a></td>
-                    </tr>
-                    </tbody>
                 </table>
                 </div>
                 {{/craigslistItems}}
@@ -44,7 +67,12 @@
             <div class="col-md-6">
                 {{#modeledSupermarketStores}}
                 <div>
-                    <table class="table table-striped table-hover">
+                    <table class="table table-hover" @media (max-width: 797px) {
+                           body {
+                           padding-left: 0px;
+                           padding-right: 0px;
+                           }
+                           }>
                         <thead>
                         <tr>
                             <th>{{smName}}</th>
@@ -66,7 +94,7 @@
                         <div class="col-sm-4">
                         {{#modeledWalmartStores}}
                         <div>
-                            <table class="table table-striped table-hover">
+                            <table class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th>{{name}}</th>
@@ -85,7 +113,7 @@
                     <div class="col-md-6">
                         {{#modeledWalmartItems}}
                         <div>
-                            <table class="table table-striped table-hover">
+                            <table class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th>{{name}}</th>
@@ -104,7 +132,7 @@
                     <div class="col-md-6">
                         {{#modeledSupermarketItems}}
                         <div>
-                            <table class="table table-striped table-hover">
+                            <table class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th>{{Itemname}}</th>
