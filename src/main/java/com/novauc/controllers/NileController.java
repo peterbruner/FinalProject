@@ -21,7 +21,7 @@ public class NileController {
         model.addAttribute("modeledWalmartItems", session.getAttribute("walmartItems"));
         model.addAttribute("modeledWalmartStores", session.getAttribute("walmartStores"));
         model.addAttribute("craigslistItems", session.getAttribute("craigslistItems"));
-        return "index";
+        return "mockindex";
     }
 
     @RequestMapping(path = "/search", method = RequestMethod.POST)

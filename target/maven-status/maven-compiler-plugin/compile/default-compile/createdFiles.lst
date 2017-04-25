@@ -1,3 +1,10 @@
 com/novauc/Application.class
-com/novauc/finalProjectController.class
-com/novauc/Item.class
+com/novauc/entities/Items.class
+com/novauc/entities/SearchMethods.class
+com/novauc/Store.class
+com/novauc/entities/Item.class
+com/novauc/entities/StoresByZip.class
+com/novauc/entities/SearchByProductName.class
+com/novauc/controllers/NileController.class
+com/novauc/ItemCL.class
+com/novauc/entities/WalmartStores.class
