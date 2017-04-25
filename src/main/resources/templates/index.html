@@ -2,64 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Store Locator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
-<body>
-
+<body style="margin: 10px;">
 <form action="/search" method="post">
     <input type="text" placeholder="Item requested" name="input">
     <input type="text" placeholder="Zipcode" name="zipcode">
     <input type="text" placeholder="City" name="city">
-    <button type="submit">Submit</button>
+    <button type="submit" class="btn btn-danger"> Find it! </button>
 </form>
+<!--<ul>-->
 
-{{#craigslistItems}}
-<ul>
-    <li>
-        {{title}}
-        price: {{price}}
-        <a href="{{url}}">Craigslist</a>
-    </li>
-</ul>
+<div>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Item</th>
+            <th>Cost</th>
+            <th>Store</th>
+            <th>Pic/link</th>
+        </tr>
+        </thead>
+
+        {{#craigslistItems}}
+        <tbody>
+        <tr>
+            <td>{{title}}</td>
+            <td>{{price}}</td>
+            <td>Craigslist</td>
+            <td><a href="{{url}}">View original listing</a></td>
+        </tr>
+        </tbody>
 {{/craigslistItems}}
 
-{{#modeledSupermarketStores}}
-<ul>
-    <li>
-        {{smName}} {{smAddress}} {{smCity}}
-    </li>
-</ul>
-{{/modeledSupermarketStores}}
 
-{{#modeledWalmartStores}}
-<ul>
-    <li>
-        {{city}} {{name}}
-    </li>
-</ul>
-{{/modeledWalmartStores}}
 
 {{#modeledWalmartItems}}
-<ul>
-    <li>
-        {{name}}
-
-        {{stock}}
-    </li>
-</ul>
+        <tbody>
+        <tr>
+            <td>{{name}}</td>
+            <td>{{salePrice}}</td>
+            <td>
+                {{#modeledWalmartStores}}
+                {{name}}
+                {{/modeledWalmartStores}}
+            </td>
+            <td><img src="{{thumbnailImage}}"></td>
+        </tr>
+        </tbody>
 {{/modeledWalmartItems}}
 
 {{#modeledSupermarketItems}}
-<ul>
-    <li>
-        {{Itemname}}
-        {{itemCategory}}
-        {{itemID}}
-        <img src="{{itemImage}}">
-    </li>
-</ul>
+        <tbody>
+        <tr>
+            <td>{{Itemname}}</td>
+            <td>{{itemCategory}}</td>
+            <td>
+                {{#modeledSupermarketStores}}
+                {{smName}}
+                {{/modeledSupermarketStores}}
+            </td>
+            <td><img src="{{itemImage}}"></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        </tbody>
 {{/modeledSupermarketItems}}
 
-
+    </table>
+</div>
 </body>
 </html>

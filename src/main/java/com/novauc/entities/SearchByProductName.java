@@ -16,7 +16,7 @@ public class SearchByProductName {
     }
 
     public SearchByProductName(String itemname, String itemDescription, String itemCategory, String itemID, String itemImage, String aisleNumber) {
-        Itemname = itemname;
+        this.Itemname = itemname;
         this.itemDescription = itemDescription;
         this.itemCategory = itemCategory;
         this.itemID = itemID;
