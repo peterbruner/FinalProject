@@ -26,6 +26,16 @@ import java.util.Random;
 
 public class SearchMethods {
 
+    //Used by SupermarketItems & Supermarket Stores
+    public static String getCharacterDataFromElement(Element e) {
+        Node child = e.getFirstChild();
+        if (child instanceof CharacterData) {
+            CharacterData cd = (CharacterData) child;
+            return cd.getData();
+        }
+        return "?";
+    }
+
     //Supermarket Items
     public static ArrayList<SearchByProductName> supermarketItems(String input){
 
@@ -71,6 +81,7 @@ public class SearchMethods {
                 line = (Element) aisle.item(0);
                 String aisleNumber = getCharacterDataFromElement(line);
 
+                //Generates a fake cost for supermarketItems
                 Random rand = new Random();
                 int itemCost = rand.nextInt(25) + 1;
 
@@ -83,16 +94,16 @@ public class SearchMethods {
         return results;
     }
 
-    //Used by SupermarketItems & Supermarket Stores
-    public static String getCharacterDataFromElement(Element e) {
-        Node child = e.getFirstChild();
-        if (child instanceof CharacterData) {
-            CharacterData cd = (CharacterData) child;
-            return cd.getData();
+    //if supermarketStores is empty (due to a valid zip code returning nothing from the api), then generates a fake name for display
+    public static ArrayList<StoresByZip> smStoreSearch(String zipcode){
+        ArrayList<StoresByZip> stores = supermarketStores(zipcode);
+        if (stores.size() == 0){
+            stores.add(new StoresByZip("Kroger"));
+//            stores.add(new StoresByZip("Giant"));
+//            stores = SearchMethods.supermarketStores("22030");
         }
-        return "?";
+        return stores;
     }
-
 
     //Supermarket Stores
     public static ArrayList<StoresByZip> supermarketStores(String zipcode){
@@ -152,18 +163,6 @@ public class SearchMethods {
         return results;
     }
 
-    //if supermarketStores is empty, generates a fake name for display
-    public static ArrayList<StoresByZip> smStoreSearch(String zipcode){
-        ArrayList<StoresByZip> stores = supermarketStores(zipcode);
-        if (stores.size() == 0){
-            stores.add(new StoresByZip("Kroger"));
-//            stores.add(new StoresByZip("Giant"));
-//            stores = SearchMethods.supermarketStores("22030");
-        }
-        return stores;
-    }
-
-
     //Walmart Items
     public static Items walmartItems(String input) throws IOException{
         RestTemplate restTemplate = new RestTemplate();
@@ -172,7 +171,7 @@ public class SearchMethods {
         );
         ObjectMapper objectMapper = new ObjectMapper();
         Items items = objectMapper.readValue(jsonData, Items.class);
-        //for loop generates fake data in lieu of a null value
+        //for loop generates fake price data in lieu of a null value
         for (Item item: items.getItems()){
             if (item.getSalePrice() == null){
                 item.setSalePrice("3.00");
@@ -187,7 +186,7 @@ public class SearchMethods {
         WalmartStores[] jsonData = restTemplate.getForObject(
                 "http://api.walmartlabs.com/v1/stores?apiKey=c3exxssx4eme5j56s5zk7xg7&zip=" + zipcode + "&format=json", WalmartStores[].class
         );
-        //gets around an error from the browser side
+        //only prints the first item returned, gets around an error from the browser side
         WalmartStores[] walmartStores = new WalmartStores[1];
         if (jsonData.length > 0) {
             walmartStores[0] = jsonData[0];
