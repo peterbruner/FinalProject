@@ -42,13 +42,17 @@
         <tbody>
         <tr>
             <td>{{name}}</td>
+            {{#salePrice}}
             <td>${{salePrice}}</td>
+            {{/salePrice}}
             <td>
                 {{#modeledWalmartStores}}
-                {{name}}
+                    {{#name}}
+                        {{name}}
+                    {{/name}}
                 {{/modeledWalmartStores}}
             </td>
-            <td><img src="{{thumbnailImage}}"></td>
+            <td><img src="{{thumbnailImage}}" style="max-width: 60px;"></td>
         </tr>
         </tbody>
 {{/modeledWalmartItems}}
@@ -63,10 +67,7 @@
                 {{smName}}
                 {{/modeledSupermarketStores}}
             </td>
-            <td><img src="{{itemImage}}"></td>
-        </tr>
-        <tr>
-            <td></td>
+            <td><img src="{{itemImage}}" style="max-width: 60px;"></td>
         </tr>
         </tbody>
 {{/modeledSupermarketItems}}

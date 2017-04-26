@@ -72,10 +72,9 @@ public class SearchMethods {
                 String aisleNumber = getCharacterDataFromElement(line);
 
                 Random rand = new Random();
+                int itemCost = rand.nextInt(25) + 1;
 
-                int smCost = rand.nextInt(50) + 1;
-
-                results.add(new SearchByProductName(itemName, itemDesc, itemCat, itemID, itemImage, aisleNumber, smCost));
+                results.add(new SearchByProductName(itemName, itemDesc, itemCat, itemID, itemImage, aisleNumber, itemCost));
             }
         }
         catch (Exception e) {
@@ -145,14 +144,23 @@ public class SearchMethods {
                 String smId = getCharacterDataFromElement(line);
 
                 results.add(new StoresByZip(smName, smAddress, smCity, smState, smZip, smPhone, smId));
-                results.size();
-                results.get(results.size()-1).getSmName();
             }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
         return results;
+    }
+
+    //if supermarketStores is empty, generates a fake name for display
+    public static ArrayList<StoresByZip> smStoreSearch(String zipcode){
+        ArrayList<StoresByZip> stores = supermarketStores(zipcode);
+        if (stores.size() == 0){
+            stores.add(new StoresByZip("Kroger"));
+//            stores.add(new StoresByZip("Giant"));
+//            stores = SearchMethods.supermarketStores("22030");
+        }
+        return stores;
     }
 
 
@@ -164,6 +172,12 @@ public class SearchMethods {
         );
         ObjectMapper objectMapper = new ObjectMapper();
         Items items = objectMapper.readValue(jsonData, Items.class);
+        //for loop generates fake data in lieu of a null value
+        for (Item item: items.getItems()){
+            if (item.getSalePrice() == null){
+                item.setSalePrice("3.00");
+            }
+        }
         return items;
     }
 
@@ -173,7 +187,12 @@ public class SearchMethods {
         WalmartStores[] jsonData = restTemplate.getForObject(
                 "http://api.walmartlabs.com/v1/stores?apiKey=c3exxssx4eme5j56s5zk7xg7&zip=" + zipcode + "&format=json", WalmartStores[].class
         );
-        return jsonData;
+        //gets around an error from the browser side
+        WalmartStores[] walmartStores = new WalmartStores[1];
+        if (jsonData.length > 0) {
+            walmartStores[0] = jsonData[0];
+        }
+        return walmartStores;
     }
 
     //Craigslist

@@ -2,6 +2,7 @@ package com.novauc.controllers;
 
 import com.novauc.entities.Items;
 import com.novauc.SearchMethods;
+import com.novauc.entities.StoresByZip;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpSession;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Controller
 public class NileController {
@@ -27,7 +29,7 @@ public class NileController {
     @RequestMapping(path = "/search", method = RequestMethod.POST)
     public String getSearchByProductName(String input, String zipcode, String city, HttpSession session) throws IOException, JAXBException {
         session.setAttribute("supermarketItems", SearchMethods.supermarketItems(input));
-        session.setAttribute("supermarketStores", SearchMethods.supermarketStores(zipcode));
+        session.setAttribute("supermarketStores", SearchMethods.smStoreSearch(zipcode));
         Items items = SearchMethods.walmartItems(input);
         session.setAttribute("walmartItems", items.getItems());
         session.setAttribute("walmartStores", SearchMethods.wmStores(zipcode));

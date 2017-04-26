@@ -13,6 +13,10 @@ public class StoresByZip {
     private String smPhone;
     private String smId;
 
+    public StoresByZip(String smName){
+        this.smName = smName;
+    }
+
     public StoresByZip(String smName, String smAddress, String smCity, String smState, String smZip, String smPhone, String smId) {
         this.smName = smName;
         this.smAddress = smAddress;
