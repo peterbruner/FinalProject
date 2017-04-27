@@ -43,20 +43,9 @@
                         <th>Item</th>
                         <th>Cost</th>
                         <th>Source</th>
-                        <th>Product</th>
+                        <th>View</th>
                     </tr>
                     </thead>
-
-                    {{#craigslistItems}}
-                    <tbody>
-                    <tr>
-                        <td>{{title}}</td>
-                        <td>${{price}}</td>
-                        <td>Craigslist</td>
-                        <td><a href="{{url}}">View original listing</a></td>
-                    </tr>
-                    </tbody>
-                    {{/craigslistItems}}
 
                     {{#modeledWalmartItems}}
                     <tbody>
@@ -76,6 +65,17 @@
                     </tr>
                     </tbody>
                     {{/modeledWalmartItems}}
+
+                    {{#craigslistItems}}
+                    <tbody>
+                    <tr>
+                        <td>{{title}}</td>
+                        <td>${{price}}</td>
+                        <td>Craigslist</td>
+                        <td><a href="{{url}}">Original listing</a></td>
+                    </tr>
+                    </tbody>
+                    {{/craigslistItems}}
 
                     {{#modeledSupermarketItems}}
                     <tbody>

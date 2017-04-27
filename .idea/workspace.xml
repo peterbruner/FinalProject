@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10c49ee0-63ac-40ca-9306-4d08b7fbeb35" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/templates/notIndex.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/templates/index.html" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" />
     </list>
     <ignored path="FinalProject.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,14 +55,14 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="20" column="49" selection-start-line="20" selection-start-column="49" selection-end-line="20" selection-end-column="49" />
+            <state relative-caret-position="287">
+              <caret line="77" column="40" selection-start-line="77" selection-start-column="40" selection-end-line="77" selection-end-column="40" />
               <folding>
                 <element signature="n#style#0;n#img#0;n#center#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#form#0;n#center#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#1;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#2;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
@@ -796,12 +793,12 @@
       <workItem from="1491918539433" duration="57505000" />
       <workItem from="1492795552453" duration="24674000" />
       <workItem from="1493049673929" duration="22016000" />
-      <workItem from="1493247026076" duration="6574000" />
+      <workItem from="1493247026076" duration="6900000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="121274000" />
+    <option name="totallyTimeSpent" value="121600000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -898,7 +895,7 @@
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#form#0;n#center#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#1;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#2;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
@@ -931,7 +928,7 @@
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#form#0;n#center#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#1;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#2;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
@@ -954,7 +951,7 @@
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#form#0;n#center#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#1;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#2;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
@@ -1022,7 +1019,7 @@
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#form#0;n#center#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#1;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#2;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
@@ -1233,14 +1230,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="20" column="49" selection-start-line="20" selection-start-column="49" selection-end-line="20" selection-end-column="49" />
+        <state relative-caret-position="287">
+          <caret line="77" column="40" selection-start-line="77" selection-start-column="40" selection-end-line="77" selection-end-column="40" />
           <folding>
             <element signature="n#style#0;n#img#0;n#center#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#form#0;n#center#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#1;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#2;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
