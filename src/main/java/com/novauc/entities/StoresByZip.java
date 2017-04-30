@@ -22,6 +22,9 @@ public class StoresByZip {
         this.smPhone = smPhone;
         this.smId = smId;
     }
+    public StoresByZip(){
+
+    }
 
     public String getSmName() {
         return smName;

@@ -11,17 +11,19 @@ public class SearchByProductName {
     private String itemID;
     private String itemImage;
     private String aisleNumber;
+    private int itemCost;
 
     public SearchByProductName() {
     }
 
-    public SearchByProductName(String itemname, String itemDescription, String itemCategory, String itemID, String itemImage, String aisleNumber) {
+    public SearchByProductName(String itemname, String itemDescription, String itemCategory, String itemID, String itemImage, String aisleNumber, int itemCost) {
         Itemname = itemname;
         this.itemDescription = itemDescription;
         this.itemCategory = itemCategory;
         this.itemID = itemID;
         this.itemImage = itemImage;
         this.aisleNumber = aisleNumber;
+        this.itemCost = itemCost;
     }
 
     public String getItemname() {
@@ -71,4 +73,13 @@ public class SearchByProductName {
     public void setAisleNumber(String aisleNumber) {
         this.aisleNumber = aisleNumber;
     }
+
+    public int getItemCost() {
+        return itemCost;
+    }
+
+    public void setItemCost(int itemCost) {
+        this.itemCost = itemCost;
+    }
 }
+

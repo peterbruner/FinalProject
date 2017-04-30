@@ -9,7 +9,7 @@ public class Item {
     private String parentItemId;
     private String name;
     private String msrp;
-    private String salePrice;
+    private String salePrice = null;
     private String upc;
     private String categoryPath;
     private String longDescription;
@@ -272,3 +272,4 @@ public class Item {
 //        this.giftOptions = giftOptions;
 //    }
 }
+

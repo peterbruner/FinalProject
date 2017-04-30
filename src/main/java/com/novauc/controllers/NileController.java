@@ -21,13 +21,13 @@ public class NileController {
         model.addAttribute("modeledWalmartItems", session.getAttribute("walmartItems"));
         model.addAttribute("modeledWalmartStores", session.getAttribute("walmartStores"));
         model.addAttribute("craigslistItems", session.getAttribute("craigslistItems"));
-        return "mockindex";
+        return "index";
     }
 
     @RequestMapping(path = "/search", method = RequestMethod.POST)
     public String getSearchByProductName(String input, String zipcode, String city, HttpSession session) throws IOException, JAXBException {
         session.setAttribute("supermarketItems", SearchMethods.supermarketItems(input));
-        session.setAttribute("supermarketStores", SearchMethods.supermarketStores(zipcode));
+        session.setAttribute("supermarketStores", SearchMethods.smStoreSearch(zipcode));
         Items items = SearchMethods.walmartItems(input);
         session.setAttribute("walmartItems", items.getItems());
         session.setAttribute("walmartStores", SearchMethods.wmStores(zipcode));
@@ -35,3 +35,4 @@ public class NileController {
         return "redirect:/";
     }
 }
+
